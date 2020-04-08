@@ -9,7 +9,7 @@ const handleDuplicateFieldsDB = err => {
 	const value = err.errmsg.match(/(["'])(?:(?=(\\?))\2.)*?\1/)[0];
 	const message = `Duplicate field value: ${value}. Please enter another value`;
 	//using regular expression to find the texts are within quotes. search-string: regular expression match text between quotes
-	console.log(value);
+	// console.log(value);
 
 	return new AppError(message, 400);
 };
@@ -71,7 +71,7 @@ const sendErrorProd = (err, req, res) => {
 	//RENDERED WEBSITE
 	// A) Operational, trusted error: send message to client
 	if (err.isOperational) {
-		console.log(err);
+		// console.log(err);
 		return res.status(err.statusCode).render("error", {
 			title: "Something went wrong!",
 			msg: err.message

@@ -8441,7 +8441,8 @@ var login = /*#__PURE__*/function () {
             _context.next = 3;
             return (0, _axios.default)({
               method: "POST",
-              url: "http://127.0.0.1:3000/api/v1/users/login",
+              // url: "http://127.0.0.1:3000 <relative api👉>/api/v1/users/login",
+              url: "/api/v1/users/login",
               data: {
                 email: email,
                 password: password
@@ -8493,7 +8494,7 @@ var logout = /*#__PURE__*/function () {
             _context2.next = 3;
             return (0, _axios.default)({
               method: "GET",
-              url: "http://127.0.0.1:3000/api/v1/users/logout"
+              url: "/api/v1/users/logout"
             });
 
           case 3:
@@ -8550,7 +8551,7 @@ var updateSettings = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            url = type === "password" ? "http://127.0.0.1:3000/api/v1/users/updateMyPassword" : "http://127.0.0.1:3000/api/v1/users/updateMe";
+            url = type === "password" ? "/api/v1/users/updateMyPassword" : "/api/v1/users/updateMe";
             _context.next = 4;
             return (0, _axios.default)({
               method: "PATCH",
@@ -8627,22 +8628,21 @@ var bookTour = /*#__PURE__*/function () {
             });
 
           case 6:
-            console.log(session);
-            _context.next = 13;
+            _context.next = 12;
             break;
 
-          case 9:
-            _context.prev = 9;
+          case 8:
+            _context.prev = 8;
             _context.t0 = _context["catch"](0);
             console.log(_context.t0);
             (0, _alert.showAlert)("error", _context.t0);
 
-          case 13:
+          case 12:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 9]]);
+    }, _callee, null, [[0, 8]]);
   }));
 
   return function bookTour(_x) {
@@ -8955,8 +8955,8 @@ if (userDataForm) {
     var form = new FormData();
     form.append('name', document.getElementById('name').value);
     form.append('email', document.getElementById('email').value);
-    form.append('photo', document.getElementById('photo').files[0]);
-    console.log(form.photo);
+    form.append('photo', document.getElementById('photo').files[0]); // console.log(form.photo);
+
     (0, _updateSettings.updateSettings)(form, 'data'); // updateSettings({
     //   name,
     //   email

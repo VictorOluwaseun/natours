@@ -93,7 +93,7 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   //we need to create a field now in our schema for the data where the password has been changed.
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10); // to convert to integer in case of necessity
-    console.log(changedTimestamp, JWTTimestamp);
+    // console.log(changedTimestamp, JWTTimestamp);
     return JWTTimestamp < changedTimestamp; //100 < 200
   }
 
@@ -105,7 +105,7 @@ userSchema.methods.createPasswordResetToken = function () {
   const resetToken = crypto.randomBytes(32).toString("hex");
 
   this.passwordResetToken = crypto.createHash("sha256").update(resetToken).digest("hex");
-  console.log(resetToken, this.passwordResetToken);
+  // console.log(resetToken, this.passwordResetToken);
 
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 

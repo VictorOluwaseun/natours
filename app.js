@@ -7,7 +7,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const cookieParser = require("cookie-parser");
-
+const compression = require("compression");
 const cors = require("cors");
 
 const AppError = require('./utils/appError');
@@ -83,6 +83,7 @@ app.use(hpp({
   whitelist: ["duration", "ratingsQuantity", "ratingsAverage", "maxGroupSize", "difficulty", "price"]
 }));
 
+app.use(compression()); //To compress the request objects coming from the client
 
 
 // app.use((req, res, next) => { // in each middleware function we have access to the req and res, and also the next function

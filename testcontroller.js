@@ -8,7 +8,7 @@ const tours = JSON.parse(
 );
 
 exports.checkID = (req, res, next, val) => {
-    console.log('Tour id is :', val);
+    // console.log('Tour id is :', val);
     if (req.params.id * 1 > tours.length - 1) {
         // return is optinal I think
         return res.status(404).json({
