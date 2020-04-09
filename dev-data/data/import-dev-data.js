@@ -73,17 +73,17 @@ const DB = process.env.DATABASE.replace(
 mongoose
     .connect(DB, {
         useNewUrlParser: true,
+        useUnifiedTopology: true,
         useCreateIndex: true,
         useFindAndModify: false
     })
-    .then(() => console.log('DB connection successful!'));
+    .then(() => console.log('DB connection successful!'))
+    .catch(e => console.log(e));
 
 // READ JSON FILE
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf-8'));
 const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
-const reviews = JSON.parse(
-    fs.readFileSync(`${__dirname}/reviews.json`, 'utf-8')
-);
+const reviews = JSON.parse(fs.readFileSync(`${__dirname}/reviews.json`, 'utf-8'));
 
 // IMPORT DATA INTO DB
 const importData = async () => {
