@@ -80,6 +80,10 @@ exports.getAll = Model => catchAsync(async (req, res, next) => {
   // const docs = await features.query.explain();
   const docs = await features.query;
 
+  if (!docs.length) {
+    return next(new AppError("No documents found", 404));
+  }
+
   // SEND RESPONSE
   res.status(200).json({
     status: 'success',

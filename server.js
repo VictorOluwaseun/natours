@@ -20,8 +20,8 @@ const DB = process.env.DATABASE
 // .replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
 
 mongoose
-    .connect(DB, {
-        // .connect(process.env.DATABASE_LOCAL, {
+    // .connect(DB, {
+    .connect(process.env.DATABASE_LOCAL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
@@ -50,3 +50,10 @@ process.on('unhandledRejection', err => {
         process.exit(1);
     });
 });
+
+process.on("SIGTERM", () => {
+    console.log("👋 SIGTERM RECIEVED. Shutting down properly");
+    server.close(() => { //All the pending requests will process until the end
+        console.log("💥 Process terminated"); //SIGTERM will case it to shutdown so we do no need process.exit(1)
+    });
+})

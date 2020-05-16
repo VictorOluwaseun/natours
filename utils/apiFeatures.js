@@ -11,11 +11,14 @@ class APIFeatures {
 		const excludedFields = ["page", "sort", "limit", "fields"];
 
 		excludedFields.forEach(el => delete queryObj[el]);
+		// console.log(queryObj);
+
 
 		//1b. Adevanced filetering
 		let queryStr = JSON.stringify(queryObj);
-		queryStr = queryStr.replace(/\b{gte|gt|lte|lt}\b/g, match => `$${match}`);
-		// console.log(JSON.parse(queryStr));
+		queryStr = queryStr.replace(/\b{gte|gt|lte|lt|ne|lt}\b/g, match => `$${match}`);
+
+		console.log(JSON.parse(queryStr));
 
 		this.query = this.query.find(JSON.parse(queryStr));
 		// let query = Tour.find(JSON.parse(queryStr));
@@ -24,7 +27,10 @@ class APIFeatures {
 
 	sort() {
 		if (this.queryString.sort) {
+			// console.log(this.queryString.sort);
+
 			const sortBy = this.queryString.sort.split(',').join(" ");
+			// console.log(sortBy);
 			this.query = this.query.sort(sortBy);
 			//sort('price ratingsAverage')
 		} else {
@@ -35,7 +41,9 @@ class APIFeatures {
 
 	limitFields() {
 		if (this.queryString.fields) {
-			const fields = this.queryString.fields.split(",").join(" "); //coming from javascriptx
+			const fields = this.queryString.fields.split(",").join(" "); //coming from javascript
+			console.log(fields);
+
 			this.query = this.query.select(fields);
 			// query = query.select('name duration difficulty');
 		} else {
